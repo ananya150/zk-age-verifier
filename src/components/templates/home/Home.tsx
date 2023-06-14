@@ -3,20 +3,54 @@ import { Heading, VStack, Text, Button } from '@chakra-ui/react';
 import { InputGroup, InputLeftElement, Input } from '@chakra-ui/react';
 import { InfoIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
+import { useSession } from 'next-auth/react';
+
+export const postDataToAPI = async (endpoint: any , params: any) => {
+  const options = {
+      method: "POST",
+      headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(params),
+  };
+
+  const res = await fetch(`/api/${endpoint}`, options);
+  const resp = await res.json();
+  return resp;
+}
 
 const Home = () => {
 
   const [num , setNum] = useState<any>(null);
   const [showOTP , setShowOTP] = useState(false);
   const [Otp , setOtp] = useState<any>(null);
+  const [client_id , setClient_id] = useState('');
+  const [loading , setLoading] = useState(false);
+  const { data } = useSession();
 
-  const handleNext = () => {
+
+  const handleNext = async () => {
     console.log(num);
+    setLoading(true);
+    const param = {num}
+    const resp = await postDataToAPI("/otp" , param);
+    const cid = resp.result.data.client_id;
+    setClient_id(cid);
+    console.log(resp);
     setShowOTP(true);
+    setLoading(false);
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    setLoading(true);
+    const address = data?.user?.address;
     console.log(Otp);
+    const param = {otp: Otp , client_id , address}
+    const resp = await postDataToAPI("/aadhar" , param);
+    setClient_id('');
+    console.log(resp);
+    setShowOTP(true);
+    setLoading(false);
   }
 
   return (
@@ -32,7 +66,7 @@ const Home = () => {
           </InputLeftElement>
           <Input value={num} onChange={(e) => {setNum(e.target.value)}} type='tel' placeholder='Aadhaar number' />
         </InputGroup>
-        <Button colorScheme='green' onClick={handleNext}>Next</Button>
+        {loading? <Button colorScheme='green' isLoading loadingText={"Submitting"}>Next</Button>  : <Button colorScheme='green' onClick={handleNext}>Next</Button>}
       </div>}
       {showOTP && <div className='w-[200px] flex-col space-y-6 py-24'>
         <Text>Enter OTP</Text>
@@ -42,7 +76,7 @@ const Home = () => {
           </InputLeftElement>
           <Input value={Otp} onChange={(e) => {setOtp(e.target.value)}} type='tel' placeholder='OTP' />
         </InputGroup>
-        <Button colorScheme='pink' onClick={handleSubmit}>Submit</Button>
+        {loading? <Button colorScheme='pink' isLoading loadingText={"Submitting"}>Next</Button>  : <Button colorScheme='pink' onClick={handleSubmit}>Submit</Button>}
       </div>}
     </VStack>
   );
