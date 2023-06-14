@@ -24,6 +24,8 @@ import { publicProvider } from 'wagmi/providers/public';
 import { SessionProvider } from 'next-auth/react';
 import type { AppProps } from 'next/app';
 
+import './global.css';
+
 const { provider, webSocketProvider } = configureChains(
   [
     arbitrum,

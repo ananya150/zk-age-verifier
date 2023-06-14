@@ -4,11 +4,18 @@ import NAV_LINKS from './paths';
 
 const NavBar = () => {
   return (
-    <HStack gap={'15px'}>
-      {NAV_LINKS.map((link) => (
-        <NavItem key={`link-${link.label}`} {...link} />
-      ))}
-    </HStack>
+    <div>
+      <div className="hidden md:block">
+        <HStack gap={'15px'} >
+          {NAV_LINKS.map((link) => (
+            <NavItem key={`link-${link.label}`} {...link} />
+          ))}
+        </HStack>
+      </div>
+      <div className='md:hidden'>
+          <NavItem label='Home' href='/' />
+      </div>
+    </div>
   );
 };
 
