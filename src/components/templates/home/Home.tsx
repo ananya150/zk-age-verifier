@@ -4,6 +4,7 @@ import { InputGroup, InputLeftElement, Input } from '@chakra-ui/react';
 import { InfoIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
+import { Card, CardHeader, CardBody} from '@chakra-ui/react'
 
 export const postDataToAPI = async (endpoint: any , params: any) => {
   const options = {
@@ -78,6 +79,20 @@ const Home = () => {
         </InputGroup>
         {loading? <Button colorScheme='pink' isLoading loadingText={"Submitting"}>Next</Button>  : <Button colorScheme='pink' onClick={handleSubmit}>Submit</Button>}
       </div>}
+      <div>
+      <Card className='max-w-[500px]'>
+        <CardHeader>
+          <Heading size='md'> How it works</Heading>
+        </CardHeader>
+        <CardBody>
+          <Text>We verify you dob using you AADHAR card.</Text>
+          <Text fontSize='xs' className='text-red-500'>WE DO NOT STORE ANY OTHER INFO. OUR CODE IS PUBLIC HERE.</Text>
+          <br/>
+          <Text>Then we generate a zk proof based on the dob and submit it on the smart contract.</Text>
+        </CardBody>
+      </Card>
+
+      </div>
     </VStack>
   );
 };
