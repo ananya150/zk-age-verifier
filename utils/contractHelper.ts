@@ -20,7 +20,7 @@ export const getContract = (abi: any, address: string, chainId: number) => {
 
  export const getAgeCheckContract = () => {
     try {
-      const contractAddr = '0x293193032d369e5b63f9086a7D752517bB684E1C';
+      const contractAddr = '0x31a65BF2C250b04dA48E482D60952C618065B94c';
   
       return getContract(ageCheckerAbi, contractAddr, 80001);
     } catch (e) {

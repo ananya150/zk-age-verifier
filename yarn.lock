@@ -1512,6 +1512,11 @@
 "@next/swc-linux-x64-gnu@13.3.1":
   "version" "13.3.1"
 
+"@next/swc-linux-x64-musl@13.3.1":
+  "integrity" "sha512-uqm5sielhQmKJM+qayIhgZv1KlS5pqTdQ99b+Z7hMWryXS96qE0DftTmMZowBcUL6x7s2vSXyH5wPtO1ON7LBg=="
+  "resolved" "https://registry.npmjs.org/@next/swc-linux-x64-musl/-/swc-linux-x64-musl-13.3.1.tgz"
+  "version" "13.3.1"
+
 "@noble/hashes@^1.2.0":
   "version" "1.2.0"
 

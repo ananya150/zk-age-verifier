@@ -1,7 +1,8 @@
+/* eslint-disable etc/no-commented-out-code */
 import {  } from '@chakra-ui/icons';
 import { Heading, VStack, Text, Button } from '@chakra-ui/react';
-import { InputGroup, InputLeftElement, Input } from '@chakra-ui/react';
-import { InfoIcon } from '@chakra-ui/icons';
+import { InputGroup, InputLeftElement, Input , InputRightElement } from '@chakra-ui/react';
+import { InfoIcon , CopyIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { Card, CardHeader, CardBody} from '@chakra-ui/react'
@@ -27,6 +28,7 @@ const Home = () => {
   const [Otp , setOtp] = useState<any>(null);
   const [client_id , setClient_id] = useState('');
   const [loading , setLoading] = useState(false);
+  const [proof , setProof] = useState<any>(null);
   const { data } = useSession();
 
 
@@ -50,8 +52,15 @@ const Home = () => {
     const resp = await postDataToAPI("/aadhar" , param);
     setClient_id('');
     console.log(resp);
-    setShowOTP(true);
+    setProof(resp.proof);
+    setNum(null);
+    setOtp(null)
+    setShowOTP(false);
     setLoading(false);
+  }
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(proof)
   }
 
   return (
@@ -79,18 +88,29 @@ const Home = () => {
         </InputGroup>
         {loading? <Button colorScheme='pink' isLoading loadingText={"Submitting"}>Next</Button>  : <Button colorScheme='pink' onClick={handleSubmit}>Submit</Button>}
       </div>}
-      <div>
-      <Card className='max-w-[500px]'>
-        <CardHeader>
-          <Heading size='md'> How it works</Heading>
-        </CardHeader>
-        <CardBody>
-          <Text>We verify you dob using you AADHAR card.</Text>
-          <Text fontSize='xs' className='text-red-500'>WE DO NOT STORE ANY OTHER INFO. OUR CODE IS PUBLIC HERE.</Text>
-          <br/>
-          <Text>Then we generate a zk proof based on the dob and submit it on the smart contract.</Text>
-        </CardBody>
-      </Card>
+      {proof && 
+        <div className='space-y-2'>
+          <span className='text-sm'>ZK-Proof</span>
+          <InputGroup className='w-[500px]'>
+            <Input value={proof} />
+            <InputRightElement onClick={handleCopy}>
+              <CopyIcon color='green.500' />
+            </InputRightElement>
+          </InputGroup>
+        </div>
+      }
+      <div className='pt-10'>
+        <Card className='max-w-[500px]'>
+          <CardHeader>
+            <Heading size='md'> How it works</Heading>
+          </CardHeader>
+          <CardBody>
+            <Text>We verify you dob using you AADHAR card.</Text>
+            <Text fontSize='xs' className='text-red-500'>WE DO NOT STORE ANY OTHER INFO. OUR CODE IS PUBLIC HERE.</Text>
+            <br/>
+            <Text>Then we generate a zk proof based on the dob which can be verified on the smart contract.</Text>
+          </CardBody>
+        </Card>
 
       </div>
     </VStack>
