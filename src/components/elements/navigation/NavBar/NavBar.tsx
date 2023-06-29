@@ -6,7 +6,7 @@ const NavBar = () => {
   return (
     <div>
       <div className="hidden md:block">
-        <HStack gap={'15px'} >
+        <HStack gap={'45px'} >
           {NAV_LINKS.map((link) => (
             <NavItem key={`link-${link.label}`} {...link} />
           ))}
