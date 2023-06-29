@@ -1,11 +1,10 @@
 /* eslint-disable etc/no-commented-out-code */
 import {  } from '@chakra-ui/icons';
-import { Heading, VStack, Text, Button } from '@chakra-ui/react';
+import {  VStack, Text, Button } from '@chakra-ui/react';
 import { InputGroup, InputLeftElement, Input  } from '@chakra-ui/react';
 import { InfoIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
-import { Card, CardHeader, CardBody} from '@chakra-ui/react'
 
 export const postDataToAPI = async (endpoint: any , params: any) => {
   const options = {
@@ -61,10 +60,10 @@ const Home = ({setProof}: any) => {
 
   return (
     <VStack w={'full'}>
-      <Heading size="md" marginBottom={6}>
-        ZK-age-verifier
-      </Heading>
-      {!showOTP && <div className='w-[350px] flex-col space-y-6 py-24'>
+        <div className='text-center mb-40'>
+          <span className=' font-semibold text-4xl'>Generate Proof</span>
+        </div>
+      {!showOTP && <div className='w-[350px] flex-col space-y-6'>
         <Text>Enter Aadhaar Number</Text>
         <InputGroup>
           <InputLeftElement pointerEvents='none'>
@@ -74,7 +73,7 @@ const Home = ({setProof}: any) => {
         </InputGroup>
         {loading? <Button colorScheme='green' isLoading loadingText={"Submitting"}>Next</Button>  : <Button colorScheme='green' onClick={handleNext}>Next</Button>}
       </div>}
-      {showOTP && <div className='w-[200px] flex-col space-y-6 py-24'>
+      {showOTP && <div className='w-[200px] flex-col space-y-6'>
         <Text>Enter OTP</Text>
         <InputGroup>
           <InputLeftElement pointerEvents='none'>
@@ -84,20 +83,6 @@ const Home = ({setProof}: any) => {
         </InputGroup>
         {loading? <Button colorScheme='pink' isLoading loadingText={"Submitting"}>Next</Button>  : <Button colorScheme='pink' onClick={handleSubmit}>Submit</Button>}
       </div>}
-      <div className='pt-10'>
-        <Card className='max-w-[500px]'>
-          <CardHeader>
-            <Heading size='md'> How it works</Heading>
-          </CardHeader>
-          <CardBody>
-            <Text>We verify you dob using you AADHAR card.</Text>
-            <Text fontSize='xs' className='text-red-500'>WE DO NOT STORE ANY OTHER INFO. OUR CODE IS PUBLIC HERE.</Text>
-            <br/>
-            <Text>Then we generate a zk proof based on the dob which can be verified on the smart contract.</Text>
-          </CardBody>
-        </Card>
-
-      </div>
     </VStack>
   );
 };
