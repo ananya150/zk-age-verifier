@@ -41,7 +41,7 @@ const VerifyProof = () => {
   return (
     <div className=''>
         <div className='text-center'>
-          <span className=' font-semibold text-4xl'>Verify Age Proof</span>
+          <span className=' font-semibold text-5xl'>Verify Age Proof</span>
         </div>
         <div className='mt-32 flex space-x-12 items-center'>
             <Input placeholder='Enter ZK proof' value={proof} onChange={(e) => {setProof(e.target.value)}} size='lg' />

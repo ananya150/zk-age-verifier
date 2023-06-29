@@ -7,7 +7,7 @@ const Working = () => {
     <Default pageName="Working">
       <div className=''>
         <div className='text-center'>
-          <span className=' font-semibold text-4xl'>How it works?</span>
+          <span className=' font-semibold text-5xl'>How it works?</span>
         </div>
         <div className='mt-40'>
         <Card>

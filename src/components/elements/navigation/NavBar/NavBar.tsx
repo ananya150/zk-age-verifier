@@ -12,8 +12,12 @@ const NavBar = () => {
           ))}
         </HStack>
       </div>
-      <div className='md:hidden'>
-          <NavItem label='Home' href='/' />
+      <div className="md:hidden">
+        <HStack gap={'15px'} >
+          {NAV_LINKS.map((link) => (
+            <NavItem key={`link-${link.label}`} {...link} />
+          ))}
+        </HStack>
       </div>
     </div>
   );

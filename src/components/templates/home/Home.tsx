@@ -61,7 +61,7 @@ const Home = ({setProof}: any) => {
   return (
     <VStack w={'full'}>
         <div className='text-center mb-40'>
-          <span className=' font-semibold text-4xl'>Generate Proof</span>
+          <span className=' font-semibold text-5xl'>Generate Proof</span>
         </div>
       {!showOTP && <div className='w-[350px] flex-col space-y-6'>
         <Text>Enter Aadhaar Number</Text>

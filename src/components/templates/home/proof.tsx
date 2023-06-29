@@ -22,7 +22,7 @@ const Proof = ({proof}: any) => {
   return (
     <div className=''>
         <div className='text-center'>
-          <span className=' font-semibold text-4xl'>Your ZK Proof</span>
+          <span className=' font-semibold text-5xl'>Your ZK Proof</span>
         </div>
         <div className='mt-32 '>
           <Textarea className='truncate' value={proof} isDisabled placeholder='Here is a sample placeholder' />
