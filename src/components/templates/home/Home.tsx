@@ -1,8 +1,8 @@
 /* eslint-disable etc/no-commented-out-code */
 import {  } from '@chakra-ui/icons';
 import { Heading, VStack, Text, Button } from '@chakra-ui/react';
-import { InputGroup, InputLeftElement, Input , InputRightElement } from '@chakra-ui/react';
-import { InfoIcon , CopyIcon } from '@chakra-ui/icons';
+import { InputGroup, InputLeftElement, Input  } from '@chakra-ui/react';
+import { InfoIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { Card, CardHeader, CardBody} from '@chakra-ui/react'
@@ -21,14 +21,13 @@ export const postDataToAPI = async (endpoint: any , params: any) => {
   return resp;
 }
 
-const Home = () => {
+const Home = ({setProof}: any) => {
 
   const [num , setNum] = useState<any>(null);
   const [showOTP , setShowOTP] = useState(false);
   const [Otp , setOtp] = useState<any>(null);
   const [client_id , setClient_id] = useState('');
   const [loading , setLoading] = useState(false);
-  const [proof , setProof] = useState<any>(null);
   const { data } = useSession();
 
 
@@ -59,9 +58,6 @@ const Home = () => {
     setLoading(false);
   }
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(proof)
-  }
 
   return (
     <VStack w={'full'}>
@@ -88,17 +84,6 @@ const Home = () => {
         </InputGroup>
         {loading? <Button colorScheme='pink' isLoading loadingText={"Submitting"}>Next</Button>  : <Button colorScheme='pink' onClick={handleSubmit}>Submit</Button>}
       </div>}
-      {proof && 
-        <div className='space-y-2'>
-          <span className='text-sm'>ZK-Proof</span>
-          <InputGroup className='w-[500px]'>
-            <Input value={proof} />
-            <InputRightElement onClick={handleCopy}>
-              <CopyIcon color='green.500' />
-            </InputRightElement>
-          </InputGroup>
-        </div>
-      }
       <div className='pt-10'>
         <Card className='max-w-[500px]'>
           <CardHeader>

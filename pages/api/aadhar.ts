@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 // @ts-expect-error because the module has no type defined
 import {groth16} from 'snarkjs';
 import path from 'path'
+import { addProof } from './db';
 
 const generateProof = async ( address: string) => {
     const wasmPath = path.resolve('./static/circuit.wasm');
@@ -55,6 +56,7 @@ export default async (req:NextApiRequest , res: NextApiResponse) => {
     
     if(above21){
         const proof = await generateProof(address);
+        await addProof(address , proof);
         res.status(200).json({proof});
     }else{
         const proof = 'You are not above 21 to generate a valid proof.'

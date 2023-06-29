@@ -1,12 +1,25 @@
 import { Default } from 'components/layouts/Default';
 import type { NextPage } from 'next';
-import { getSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const HomePage: NextPage = () => {
+
+  const router = useRouter();
+
+  const {data , status} = useSession();
+  useEffect(() => {
+    console.log(data?.user)
+    if(data?.user){
+      router.push('/')
+    }
+  }, [status])
+
   return (
     <Default pageName="Home">
-      <div>
-
+      <div className='flex justify-center'>
+        Please Connect your wallet!
       </div>
     </Default>
   );

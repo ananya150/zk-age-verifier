@@ -25,6 +25,7 @@
     "ethers": "^5.6.9",
     "ffjavascript": "^0.2.59",
     "framer-motion": "^10",
+    "mongoose": "^7.3.1",
     "moralis": "^2.18.4",
     "next": "^13.3.1",
     "next-auth": "^4.20.1",
