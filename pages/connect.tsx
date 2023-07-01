@@ -12,12 +12,12 @@ const HomePage: NextPage = () => {
   useEffect(() => {
     console.log(data?.user)
     if(data?.user){
-      router.push('/')
+      router.push('/proof')
     }
   }, [status])
 
   return (
-    <Default pageName="Home">
+    <Default className='' pageName="Home">
       <div className='flex justify-center'>
         Please Connect your wallet!
       </div>
@@ -33,7 +33,7 @@ export const getServerSideProps = async (context: any) => {
   if(session?.user) {
     return {
       redirect: {
-        destination: '/'
+        destination: '/proof'
       }
     }
   }

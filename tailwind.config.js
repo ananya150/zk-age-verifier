@@ -13,6 +13,9 @@ module.exports = {
       backgroundImage: {
         'bg1': "url('/bg1.jpg')",
         'bg2': "url('/bg2.jpg')",
+      },
+      fontFamily: {
+        'satoshi' : ['Satoshi', 'sans-serif'],
       }
     },
   },

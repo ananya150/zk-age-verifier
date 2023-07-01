@@ -4,7 +4,7 @@ import { Card, CardBody, Heading , Stack , StackDivider , Text , Box } from '@ch
 
 const Working = () => {
   return (
-    <Default pageName="Working">
+    <Default className='' pageName="Working">
       <div className=''>
         <div className='text-center'>
           <span className=' font-semibold text-5xl'>How it works?</span>
