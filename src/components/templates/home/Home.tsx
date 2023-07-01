@@ -5,6 +5,7 @@ import { InputGroup, InputLeftElement, Input  } from '@chakra-ui/react';
 import { InfoIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
+import { WarningIcon } from '@chakra-ui/icons';
 
 export const postDataToAPI = async (endpoint: any , params: any) => {
   const options = {
@@ -28,18 +29,25 @@ const Home = ({setProof}: any) => {
   const [client_id , setClient_id] = useState('');
   const [loading , setLoading] = useState(false);
   const { data } = useSession();
+  const [err , setErr] = useState(false);
 
 
   const handleNext = async () => {
     console.log(num);
+    setErr(false)
     setLoading(true);
     const param = {num}
     const resp = await postDataToAPI("/otp" , param);
     const cid = resp.result.data.client_id;
-    setClient_id(cid);
-    console.log(resp);
-    setShowOTP(true);
-    setLoading(false);
+    if(resp.result.data.otp_sent){
+      setClient_id(cid);
+      console.log(resp);
+      setShowOTP(true);
+      setLoading(false);
+    }else{
+      setErr(true);
+      setLoading(false);
+    }
   }
 
   const handleSubmit = async () => {
@@ -61,16 +69,22 @@ const Home = ({setProof}: any) => {
   return (
     <VStack w={'full'}>
         <div className='text-center mb-40'>
-          <span className=' font-semibold text-5xl'>Generate Proof</span>
+          <span className='font-satoshi text-[40px] md:text-[80px] hover:text-red-500 duration-100'>Generate Proof</span>
         </div>
-      {!showOTP && <div className='w-[350px] flex-col space-y-6'>
-        <Text>Enter Aadhaar Number</Text>
+      {!showOTP && <div className='w-[450px] flex-col space-y-6'>
+        <Text>Enter Aadhaar Number (For indian residents only)</Text>
         <InputGroup>
           <InputLeftElement pointerEvents='none'>
             <InfoIcon color='gray.300' />
           </InputLeftElement>
           <Input value={num} onChange={(e) => {setNum(e.target.value)}} type='tel' placeholder='Aadhaar number' />
         </InputGroup>
+        {err && 
+          <div className='flex space-x-2 text-red-500 items-center'>
+            <WarningIcon />
+            <Text>Invalid Number</Text>
+          </div>
+        }
         {loading? <Button colorScheme='green' isLoading loadingText={"Submitting"}>Next</Button>  : <Button colorScheme='green' onClick={handleNext}>Next</Button>}
       </div>}
       {showOTP && <div className='w-[200px] flex-col space-y-6'>

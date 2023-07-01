@@ -5,10 +5,6 @@ import Head from 'next/head';
 
 const Default: FC<{ children: ReactNode; pageName: string; className: string }> = ({ children, pageName, className }) => (
   <div className={`h-screen ${className}`}>
-    {/* <img className='opacity-[20%] absolute left-0 top-0 w-[50%] h-[50%] -z-10' src='/bg1.jpg' alt='background' />
-    <img className='opacity-[20%] absolute left-1/2 top-1/2 w-[50%] h-[50%] -z-10' src='/bg1.jpg' alt='background' />
-    <img className='opacity-[20%] absolute left-0 top-1/2 w-[50%] h-[50%] -z-10' src='/bg1.jpg' alt='background' />
-    <img className='opacity-[20%] absolute left-1/2 top-0 w-[50%] h-[50%] -z-10' src='/bg1.jpg' alt='background' /> */}
     <Head>
       <title>{`${pageName} | ZK-Verifier`}</title>
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />

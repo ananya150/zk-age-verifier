@@ -17,8 +17,8 @@ const HomePage: NextPage = () => {
   }, [status])
 
   return (
-    <Default className='' pageName="Home">
-      <div className='flex justify-center'>
+    <Default className='bg-black' pageName="Connect">
+      <div className='font-satoshi text-[40px] md:text-[60px] text-center hover:text-red-500 duration-100'>
         Please Connect your wallet!
       </div>
     </Default>

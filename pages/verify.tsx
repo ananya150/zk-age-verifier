@@ -5,7 +5,7 @@ import VerifyProof from 'components/templates/verify/verifyProof';
 
 const verify = () => {
   return (
-    <Default className='' pageName="Verify">
+    <Default className='bg-black' pageName="Verify">
       <VerifyProof />
     </Default>
   )
