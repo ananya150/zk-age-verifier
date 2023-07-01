@@ -1,35 +1,37 @@
-import { Default } from 'components/layouts/Default';
 import type { NextPage } from 'next';
-import { Card , Stack , CardBody , Heading , Text, CardFooter , Button  } from '@chakra-ui/react';
+import { Card  , CardBody , Heading , Text, CardFooter , Button   , CardHeader  } from '@chakra-ui/react';
 import Image from 'next/image';
 import {  Header } from 'components/modules';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 const CardCompnent = () => {
+  const router = useRouter();
   return (
-    <Card
-      direction={{ base: 'column', sm: 'row' }}
-      overflow='hidden'
-      variant='outline'
-    >
-
-      <Stack>
+    <div className='md:flex md:justify-center md:space-x-10 space-y-16 md:space-y-0 bg-black p-6 pb-20 '>
+      <Card className='hover:scale-105 duration-100 hover:text-red-300 md:w-[430px]' backgroundColor="#141414">
+        <CardHeader>
+          <Heading size='md'> Generating Age Proofs</Heading>
+        </CardHeader>
         <CardBody>
-          <Heading size='md'>The perfect latte</Heading>
-
-          <Text py='2'>
-            Caffè latte is a coffee beverage of Italian origin made with espresso
-            and steamed milk.
-          </Text>
+          <Text>We use your date of birth from your Aadhaar Card to generate a Zero-Knowledge Proof that you are above 21 years.</Text>
         </CardBody>
-
         <CardFooter>
-          <Button variant='solid' colorScheme='blue'>
-            Buy Latte
-          </Button>
+          <Button className='hover:text-blue-300' onClick={() => {router.push('/proof')}}>Generate Proof</Button>
         </CardFooter>
-      </Stack>
-    </Card>
+      </Card>
+      <Card className='hover:scale-105 duration-100 hover:text-red-300 md:w-[430px]' backgroundColor="#141414">
+        <CardHeader>
+          <Heading size='md'> Verifying Age Proofs </Heading>
+        </CardHeader>
+        <CardBody>
+          <Text>To proof anyone that you are above 21 years of age, just give them the generated proof and poove that you own your address.</Text>
+        </CardBody>
+        <CardFooter>
+        <Button className='hover:text-blue-300' onClick={() => {router.push('/verify')}}>Verify Proof</Button>
+        </CardFooter>
+      </Card>
+    </div>
   )
 }
 
@@ -59,7 +61,9 @@ const HomePage: NextPage = () => {
           <div className='font-satoshi md:-ml-32 text-[40px] md:text-[80px] hover:text-red-500 duration-100'>Zero-Knowledge</div>
           <div className='md:ml-40 ml-28 text-[40px] md:text-[80px] font-satoshi hover:text-red-500 duration-100'>Age Verifier</div>
         </div>
-        <div className='mt-40'>
+
+      <div className='mt-36'>
+        <CardCompnent />
       </div>
 
       </div>
