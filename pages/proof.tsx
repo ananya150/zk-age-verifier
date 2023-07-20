@@ -17,7 +17,7 @@ const ProofPage: NextPage = (props: any) => {
   },[])
 
   return (
-    <Default className='bg-black' pageName="Home">
+    <Default className='bg-black ' pageName="Home">
       {proof? <Proof proof={proof} /> : <Home setProof={setProof} />}
     </Default>
   );
